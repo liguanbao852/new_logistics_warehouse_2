@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<!-- mini期货发送站内信 -->
+	<!-- <sqlMap resource="com/hszc/niutrade/query/dao/mapper/MessageEmailMapper.xml"/> -->
+	<!-- <sqlMap resource="com/hszc/zdb/user/dao/mapper/t_user_info_SqlMap.xml"/>
+	<sqlMap resource="com/hszc/zdb/product/dao/mapper/t_product_info_SqlMap.xml"/>-->
+	<sqlMap resource="com/lwh/user/dao/mapper/t_user_info_SqlMap.xml"/> 
+</sqlMapConfig>

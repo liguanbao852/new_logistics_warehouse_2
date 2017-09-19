@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+    
+    <!-- 定时删除上一交易日行情 -->
+    <bean id="delOldQuotation" class="com.hszc.common.jobs.DelOldQuotation" />
+    <bean id="delOldQuotationTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="delOldQuotation" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>deleteQuotation</value>
+		</property>
+	</bean>
+    <!-- 定义执行时间 -->
+	<bean id="doTime_delOldQuotationJobDefination" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+           <ref bean="delOldQuotationTask"/>
+        </property>
+        <!-- cron表达式 每天零时执行一次-->
+        <property name="cronExpression">
+        	 <value>0 30 8 * * ?</value>
+        </property>
+    </bean>
+    
+    <!-- 定时添加行情数据入库 -->
+    <bean id="initQuotation" class="com.hszc.common.jobs.InitQuotation" />
+    <bean id="initQuotationTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="initQuotation" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>loadQuotation</value>
+		</property>
+	</bean>
+    <!-- 定义执行时间 -->
+	<bean id="doTime_initQuotationJobDefination" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+           <ref bean="initQuotationTask"/>
+        </property>
+        <!-- cron表达式 每天零时执行一次-->
+        <property name="cronExpression">
+        	 <value>0 5 20 * * ?</value>
+        </property>
+    </bean>
+    
+   <!-- 定时添加初始化数据入库 -->
+    <bean id="tradeApiConnect" class="com.hszc.common.jobs.TradeApiConnect" />
+    <bean id="tradeApiConnecttTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="tradeApiConnect" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>tradeApiConnect</value>
+		</property>
+	</bean>
+    <!-- 定义执行时间 -->
+	<bean id="doTime_tradeApiConnecttJobDefination" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail">
+           <ref bean="tradeApiConnecttTask"/>
+        </property>
+        <!-- cron表达式 每天零时执行一次-->
+        <property name="cronExpression">
+        	 <value>0 5 20 * * ?</value>
+        </property>
+    </bean>
+    
+    <bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+         <property name="triggers">
+             <list>
+             	 <ref bean="doTime_delOldQuotationJobDefination"></ref>
+                 <ref bean="doTime_initQuotationJobDefination"></ref>
+                 <ref bean="doTime_tradeApiConnecttJobDefination"></ref>
+             </list>
+         </property>
+     </bean>
+</beans>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="t_user_info" >
+	<insert id="insertUserInfo"  parameterClass="com.lwh.user.entity.UserInfo">
+		insert into t_user_info (id, user_id, user_name, password, record_status)
+		values(#id#, #userId#, #userName#, #password#, 1);
+	</insert>
+	
+	
+	
+  <!-- <resultMap id="usercenter_UserInfoResult" class="com.hszc.zdb.user.entity.UserInfo" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="pay_password" property="payPassword" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="identify_card" property="identifyCard" jdbcType="VARCHAR" />
+    <result column="referrer_user_id" property="referrerUserId" jdbcType="VARCHAR" />
+    <result column="user_login_name" property="userLoginName" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updator" property="updator" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="available" property="available" jdbcType="BigDecimal" />
+    <result column="unavailable" property="unavailable" jdbcType="BigDecimal" />
+    <result column="all_account" property="allAccount" jdbcType="BigDecimal" />
+    <result column="randomcode" property="randomcode"/>
+  </resultMap>
+  
+  <sql id="usercenter_Example_Where_Clause" >
+    	<dynamic prepend="WHERE">
+		  <isNotNull prepend="and" property="id" >
+	        id = #id:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="and" property = "userId">
+	        user_id = #userId:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="and" property="userName" >
+	        user_name = #userName:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="and" property="payPassword" >
+	        pay_password = <![CDATA[MD5(#payPassword:VARCHAR#)]]>
+	      </isNotNull>
+	      <isNotNull prepend="and" property="password" >
+	        password = <![CDATA[MD5(#password:VARCHAR#)]]>
+	      </isNotNull>
+	      <isNotNull prepend="and" property="userPhone" >
+	          user_phone = #userPhone:VARCHAR# 
+	      </isNotNull>
+	      <isNotNull prepend="and" property="userEmail" >
+	        user_email = #userEmail:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="and" property="identifyCard" >
+	        identify_card = #identifyCard:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="and" property="referrerUserId" >
+	        referrer_user_id = #referrerUserId:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="and" property="creator" >
+	        creator = #creator:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="and" property="createTime" >
+	        create_time = #createTime:TIMESTAMP#
+	      </isNotNull>
+	      <isNotNull prepend="and" property="updator" >
+	        updator = #updator:VARCHAR#
+	      </isNotNull>
+	      <isNotNull prepend="and" property="updateTime" >
+	        update_time = #updateTime:TIMESTAMP#
+	      </isNotNull>
+		</dynamic>
+  </sql>
+  
+  <select id="usercenter_selectByUserId" resultMap="usercenter_UserInfoResult" parameterClass="java.lang.String" >
+    select id, user_id, user_name, pay_password, password, user_phone, user_email, identify_card,user_login_name,
+      referrer_user_id, creator, create_time, updator, update_time
+    from t_user_info
+    where userId = #userId:VARCHAR#
+  </select>
+  
+  <select id="usercenter_select_userInfo" resultMap="usercenter_UserInfoResult" parameterClass="com.hszc.zdb.user.entity.UserInfo">
+	   select u.id, u.user_id, u.user_name, u.pay_password, u.password, u.user_phone, u.user_email, u.identify_card,
+      	u.referrer_user_id,u.user_login_name,u.creator, u.create_time, u.updator, u.update_time, a.available, a.unavailable, (IFNULL(a.available,0)+IFNULL(a.unavailable,0)) AS all_account
+    	,u.randomcode from t_user_info u ,t_virtual_account a
+    	where u.user_id = a.fk_user_info 
+    	<dynamic>
+    		<isNotEmpty  prepend="and" property="userPhone">
+    			(u.user_phone = #userPhone# or user_login_name=#userPhone# )
+    		</isNotEmpty>
+    		<isNotEmpty  prepend="and" property="userId">
+    			u.user_id = #userId#
+    		</isNotEmpty>
+    		<isNotEmpty  prepend="and" property="identifyCard">
+    			u.identify_card = #identifyCard#
+    		</isNotEmpty>
+    	</dynamic>
+    	
+    	
+  </select>
+  
+  <select id="usercenter_selectCount" resultClass="java.lang.Integer" parameterClass="com.hszc.zdb.user.entity.UserInfo">
+	   select count(*) from t_user_info
+   	   <include refid="usercenter_Example_Where_Clause" />
+  </select>
+  
+  -->
+</sqlMap>
