@@ -7,4 +7,6 @@
 	<!-- <sqlMap resource="com/hszc/zdb/user/dao/mapper/t_user_info_SqlMap.xml"/>
 	<sqlMap resource="com/hszc/zdb/product/dao/mapper/t_product_info_SqlMap.xml"/>-->
 	<sqlMap resource="com/lwh/user/dao/mapper/t_user_info_SqlMap.xml"/> 
+	<sqlMap resource="com/lwh/order/dao/mapper/t_order_info_SqlMap.xml"/> 
+	
 </sqlMapConfig>

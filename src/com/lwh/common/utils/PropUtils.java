@@ -12,7 +12,7 @@ public class PropUtils {
 	static {
 		try {
 			InputStream in = PropUtils.class
-					.getResourceAsStream("/zdb.properties");
+					.getResourceAsStream("/lwh.properties");
 			properties.load(in);
 		} catch (IOException e) {
 			logger.error(e);

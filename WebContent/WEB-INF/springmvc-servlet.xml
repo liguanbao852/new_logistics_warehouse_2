@@ -25,8 +25,18 @@
 	<!-- 默认扫描的包路径 -->  
     <context:component-scan base-package="com.lwh.*.**.web"></context:component-scan> 
     <!-- 添加注解驱动 -->  
-	<mvc:annotation-driven />
-	
+	<mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven> 
+  
 	<!-- 静态文件（css、js、images）配置不经过DispatchServelet处理 -->
 	<mvc:resources location="/" mapping="/**" />
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -44,5 +54,7 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:viewClass="org.springframework.web.servlet.view.JstlView" p:prefix="/pages/"
 		p:suffix=".jsp" />
+
+	
 
 </beans>

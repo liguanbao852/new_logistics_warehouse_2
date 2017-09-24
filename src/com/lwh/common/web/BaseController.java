@@ -30,6 +30,7 @@ public class BaseController {
 	protected void print(HttpServletResponse response, String msg) {
 		PrintWriter out = null;
 		try {
+			response.setContentType("application/json;charset=UTF-8");
 			out = response.getWriter();
 			out.print(msg);
 		} catch (Exception e) {
