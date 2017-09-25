@@ -580,7 +580,7 @@
                                         	时间：2017-09-24
                                         	描述：
                                         -->
-										<button ng-click="startAnalysisPrority()" type="button">点击模拟</button>
+										<button ng-click="startAnalysisPrority(item.id)" type="button">点击模拟</button>
 									</td>
 								</tr>
 							</tbody>

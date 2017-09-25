@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="t_order_info" >
+
+	<select id="queryOrderInfoList"  resultClass="java.util.HashMap"  >
+		select 
+			a.order_no, a.order_name, a.order_cust, a.order_begin_date, a.order_end_date, a.is_full, b.customer_name
+		from t_order_info a 
+		left join t_customer_info b
+		on a.order_cust = b.customer_id order by a.order_end_date			
+	</select>
+	
+	<resultMap id="orderProductInfoMap" class="com.lwh.order.entity.OrderProductInfo" >
+   	 	<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+   	 	<result column="product_id" property="productId" jdbcType="VARCHAR" />
+   	 	<result column="product_name" property="productName" jdbcType="VARCHAR" />
+   	 	<result column="product_num" property="productNum" jdbcType="VARCHAR" />
+   	 	<result column="product_cnt" property="productCnt" jdbcType="Integer" />
+   	 	<result column="product_price" property="productPrice" jdbcType="BigDecimal" />
+   	 	<result column="is_full" property="isFull" jdbcType="CHAR" />
+	</resultMap>
+	
+	<select id="queryOrderProductInfoList"  parameterClass="String" resultMap="orderProductInfoMap" >
+		select 
+			a.order_no, a.product_id, a.product_name, a.product_num, a.product_cnt, a.product_price, a.is_full
+		from t_order_product_info a 
+		where a.order_no = #order_no#		
+	</select>
+	
+	
+	<select id="queryMaterialInfoList" resultClass="java.util.HashMap" >
+		select
+			a.material_id, a.material_name, a.material_num, a.is_material, b.company_id, b.company_name
+		from 
+		(
+			select 
+				material_id, material_name, material_num, '1' as is_material
+			from t_material_info 
+			union ALL
+			select 
+				accessory_id as material_id, accessory_name as material_name, accessory_num as material_num, '0' as is_material
+			from t_accessory_info where is_buy = '1'
+		)  a 
+		left join t_company_material_info b
+		on b.material_id = a.material_id	
+	</select>
+	<select id="queryMaterialInfoList_forOrder" resultClass="java.util.HashMap"   parameterClass="String" >
+		select
+			a.material_id, a.material_name, a.material_num, a.is_material, b.company_id, b.company_name
+		from 
+		(
+			select 
+				material_id, material_name, material_num, '1' as is_material
+			from t_material_info 
+			union ALL
+			select 
+				tai.accessory_id as material_id, tai.accessory_name as material_name, tai.accessory_num as material_num, '0' as is_material
+			from t_order_product_info topi 
+			LEFT JOIN t_product_accessory_info tpai
+			on topi.product_id = tpai.product_id
+			left join t_accessory_info tai
+			on tai.accessory_id = tpai.accessory_id
+			and tai.is_buy = '1'
+			where topi.order_no = #orderId#
+			and tai.accessory_id is not null
+		)  a 
+		left join t_company_material_info b
+		on b.material_id = a.material_id
+
+	</select>
+	
+	
+	
+	<resultMap id="productLineMap" class="com.lwh.order.entity.ProductLineInfo" >
+   	 	<result column="product_line_id" property="productLineId" jdbcType="VARCHAR" />
+   	 	<result column="product_line_name" property="productLineName" jdbcType="VARCHAR" />
+   	 	<result column="product_line_status" property="productLineStatus" jdbcType="CHAR" />
+	</resultMap>
+	<select id="queryProductLineList" resultMap="productLineMap" parameterClass="String">
+		select 
+			a.product_line_id, a.product_line_name, a.product_line_status
+		from t_product_line_info a	
+	</select>
+	
+	<select id="queryProductLineList_available" resultMap="productLineMap" parameterClass="String">
+		select 
+			a.product_line_id, a.product_line_name, a.product_line_status
+		from t_product_line_info a
+		where a.product_line_status = #available_type#
+	</select>
+	
+
+	<select id="queryMachineList" resultClass="java.util.HashMap"   parameterClass="String">
+		select 
+			a.machine_id, a.machine_name, a.belong_product_line, a.is_available
+		from t_machine_info a 	
+	</select>
+	<select id="queryMachineList_available" resultClass="java.util.HashMap"   parameterClass="String">
+		select 
+			a.machine_id, a.machine_name, a.belong_product_line, a.is_available
+		from t_machine_info a 
+	</select>
+	
+	<select id="queryMachineFunctionList" resultClass="java.util.HashMap"  parameterClass="String">
+		select 
+			a.machine_id, a.machine_name, a.function_id, a.function_name, a.is_available, a.elapsed_time, a.machine_cost, a.human_cost
+		from t_machine_function_info a	
+	</select>
+	<select id="queryMachineFunctionList_forOrder" resultClass="java.util.HashMap"  parameterClass="String">
+		select 
+			tmfi.*  
+		from t_order_product_info topi
+		LEFT JOIN t_product_accessory_info tpai
+		on topi.product_id = tpai.product_id
+		LEFT JOIN t_machine_function_info tmfi
+		on tmfi.accessory_id = tpai.accessory_id
+		where topi.order_no = #orderId# 
+		and tmfi.function_id is not null
+	</select>
+	
+	<select id="queryMachineFunctionListForPd" resultClass="java.util.HashMap"  parameterClass="String">
+		select 
+			tmfi.*  
+	 from t_product_accessory_info tpai
+		LEFT JOIN t_machine_function_info tmfi
+		on tmfi.accessory_id = tpai.accessory_id
+		where tpai.product_id = #productId#
+		and tmfi.function_id is not null
+	</select>
+	
+	<select id="queryMachineListForPd" resultClass="java.util.HashMap"  parameterClass="String">
+		select 
+			tmfi.*  
+	 from t_product_accessory_info tpai
+		LEFT JOIN t_machine_function_info tmfi
+		on tmfi.accessory_id = tpai.accessory_id
+		where tpai.product_id = #productId#
+		and tmfi.function_id is not null
+	</select>
+	
+	
+	<select id="queryAccessoryList" resultClass="java.util.HashMap"  parameterClass="String" >
+		select 
+			a.accessory_id , a.accessory_name , a.accessory_num, a.is_buy
+		from t_accessory_info 
+		where a.is_buy = '0'
+	</select>
+	
+	<select id="queryAccessoryList_forOrder" resultClass="java.util.HashMap"  parameterClass="String" >
+		select 
+			tai.accessory_id , tai.accessory_name , tai.accessory_num, tai.is_buy
+		from t_order_product_info topi 
+		LEFT JOIN t_product_accessory_info tpai
+		on topi.product_id = tpai.product_id
+		left join t_accessory_info tai
+		on tai.accessory_id = tpai.accessory_id
+		and tai.is_buy = '0'
+		where topi.order_no = #orderId#
+		and tai.accessory_id is not null
+	</select>
+	
+	
+	<select id="queryWaitingTasklist" resultClass="java.util.HashMap"  parameterClass="String">
+		select 		
+			topi.order_no, topi.product_cnt, topi.product_num, topi.product_id, topi.product_name, topi.product_price,
+			(topi.product_price * topi.product_num ) as total_amount, 
+			toi.order_end_date,
+			(tpi.product_cost * topi.product_num ) as total_cost,
+		   toi.factor1, 
+		   toi.factor2,
+				tci.customer_important 
+		from t_order_product_info topi 
+		left join t_product_info tpi
+		on tpi.product_id = topi.product_id
+		left JOIN t_order_info toi
+		on topi.order_no = toi.order_no
+		left join t_customer_info tci
+		on toi.order_cust = tci.customer_id
+		where topi.order_no = #orderId#
+		and topi.is_full = '0'
+	</select>
+	
+	<select id="queryOrderPrdFactorList" resultClass="java.util.HashMap"  parameterClass="String">
+		select 		
+			topi.order_no, topi.product_cnt, topi.product_num, topi.product_id, topi.product_name, topi.product_price,
+			(topi.product_price * topi.product_num ) as total_amount, 
+			toi.order_end_date,
+			(tpi.product_cost * topi.product_num ) as total_cost,
+		   toi.factor1, 
+		   toi.factor2,
+				tci.customer_important ,
+				((topi.product_price * topi.product_num -tpi.product_cost * topi.product_num ) * (toi.factor1 + toi.factor2 + tci.customer_important) ) as prd_pa 
+		from t_order_product_info topi 
+		left join t_product_info tpi
+		on tpi.product_id = topi.product_id
+		left JOIN t_order_info toi
+		on topi.order_no = toi.order_no
+		left join t_customer_info tci
+		on toi.order_cust = tci.customer_id
+		where topi.order_no = #orderId#
+	</select>
+	
+	<update id="updateOnlineOrderOff">
+		update t_order_info toi
+		set toi.is_online = '0'
+		where  toi.is_online = '1';
+	</update>
+	<update id="updateOnlineOrder" parameterClass="String">
+		update t_order_info toi
+		set toi.is_online = '1'
+		where  toi.order_no = #nowOnlineOrderId#;
+	</update>
+	
+	<select id="queryNullPrdList"  resultClass="java.util.HashMap"  parameterClass="String">
+		select 
+			 tpi.*
+		from t_product_info tpi
+		LEFT JOIN t_order_product_info topi
+		on topi.product_id = tpi.product_id
+		and topi.order_no = #nowOnlineOrderId#
+		where topi.order_no is null
+	</select>
+	
+	<select id="queryPrdAccessoryList" resultClass="java.util.HashMap"  parameterClass="String">
+	select 
+		tai.accessory_id, tai.accessory_name,
+	  (CASE when topi.id is null then 0
+	    else 1 end) as is_prd
+	from t_accessory_info  tai
+	LEFT JOIN t_product_accessory_info tpai
+	on tpai.accessory_id = tai.accessory_id
+	left join t_order_product_info topi 
+	on topi.product_id = tpai.product_id
+	and topi.order_no = #nowOnlineOrderId#
+	where tai.is_buy = 0
+	order by tai.accessory_name
+	</select>
+	
+	<select id="queryPrdBuyAccessoryList" resultClass="java.util.HashMap"  parameterClass="String">
+		select 
+			tt.accessory_name, tt.accessory_id, 
+			case when temp.tatal_num is NULL then 0
+			  	else temp.tatal_num end as tatal_num, 
+			case when temp.tatal_num is NULL then tt.accessory_num
+					else (tt.accessory_num - temp.tatal_num ) end as buy_num,
+      tcmi.company_id,
+		  tcmi.company_name
+		from t_accessory_info tt
+		LEFT JOIN
+		(
+		select 
+				sum(topi.product_num) as tatal_num,
+				tai.accessory_name,
+				tai.accessory_id
+		from t_order_product_info topi 
+		left JOIN t_product_accessory_info tpai
+		on tpai.product_id = topi.product_id
+		left join t_accessory_info tai 
+		on tai.accessory_id = tpai.accessory_id
+		where topi.order_no = #nowOnlineOrderId#
+		and tai.is_buy = 1
+		) temp	  
+		on temp.accessory_id = tt.accessory_id
+		left join t_company_material_info tcmi
+		on tcmi.material_id = tt.accessory_id
+		where tt.is_buy = 1
+
+		
+	</select>
+	
+</sqlMap>

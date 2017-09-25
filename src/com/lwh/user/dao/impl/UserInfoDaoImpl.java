@@ -23,7 +23,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		
 		userInfo.setId(UUID.randomUUID().toString());
 		
-		sqlMapClientTemplate.insert("insertUserInfo", userInfo);
+		//sqlMapClientTemplate.insert("insertUserInfo", userInfo);
 		
 		return 1;
 	}
