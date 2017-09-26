@@ -4,7 +4,7 @@
 
 	<select id="queryOrderInfoList"  resultClass="java.util.HashMap"  >
 		select 
-			a.order_no, a.order_name, a.order_cust, a.order_begin_date, a.order_end_date, a.is_full, b.customer_name
+			a.order_no, a.order_name, a.order_cust, date_format(a.order_begin_date, '%Y-%m-%d %H:%i:%s') as order_begin_date, date_format(a.order_end_date, '%Y-%m-%d %H:%i:%s') as order_end_date, a.is_full, b.customer_name
 		from t_order_info a 
 		left join t_customer_info b
 		on a.order_cust = b.customer_id order by a.order_end_date			
@@ -164,7 +164,7 @@
 		select 		
 			topi.order_no, topi.product_cnt, topi.product_num, topi.product_id, topi.product_name, topi.product_price,
 			(topi.product_price * topi.product_num ) as total_amount, 
-			toi.order_end_date,
+			date_format(toi.order_end_date, '%Y-%m-%d %H:%i:%s') as order_end_date,
 			(tpi.product_cost * topi.product_num ) as total_cost,
 		   toi.factor1, 
 		   toi.factor2,
@@ -184,7 +184,7 @@
 		select 		
 			topi.order_no, topi.product_cnt, topi.product_num, topi.product_id, topi.product_name, topi.product_price,
 			(topi.product_price * topi.product_num ) as total_amount, 
-			toi.order_end_date,
+			date_format(toi.order_end_date, '%Y-%m-%d %H:%i:%s') as order_end_date,
 			(tpi.product_cost * topi.product_num ) as total_cost,
 		   toi.factor1, 
 		   toi.factor2,

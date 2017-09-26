@@ -1,7 +1,7 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="taglibs.jsp" %>
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -19,7 +19,7 @@
 		<link rel="stylesheet" href="<%=path %>/pages/css/factory.css" />
 	</head>
 
-	<body ng-app="homeFactory" ng-controller="homeCtrl" >
+	<body ng-app="homeFactory" ng-controller="homeCtrl" style="height: 100%;">
 		<div class="col-xs-12 col-sm-12 col-md-12"  style="height: 10px;">
 			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 				<div class="container">
@@ -62,21 +62,18 @@
 						<a ng-click="getCurrentOrder()" href="#">生产列表</a>
 					</li>
 					<li ng-click="oldState=4" ng-class="{'selectStyle':oldState==4}">
-						<a ng-click="getConfig()" href="#">产线配置</a>
+						<a ng-click="getConfig()" href="#">产线配置和设备功能运行状况</a>
 					</li>
 					<li ng-click="oldState=5" ng-class="{'selectStyle':oldState==5}">
-						<a ng-click="getDeviceStatus()" href="#">设备功能运行状况</a>
-					</li>
-					<li ng-click="oldState=6" ng-class="{'selectStyle':oldState==6}">
 						<a ng-click="getOrderStatus()" href="#">加工订单状态</a>
 					</li>
-					<li ng-click="oldState=7" ng-class="{'selectStyle':oldState==7}">
+					<li ng-click="oldState=6" ng-class="{'selectStyle':oldState==6}">
 						<a ng-click="getProductLine()" href="#">常规排产</a>
 					</li>
 				</ul>
 			</div>
-			<div class="col-xs-12  col-sm-12 col-md-12">
-				<div class="well well-lg" style="height: 100%;overflow: auto;">
+			<div class="col-xs-12  col-sm-12 col-md-12" style="height: 100%;">
+				<div class="well well-lg" style="height: 100%;overflow: auto;overflow-x: auto;">
 					<div style="display: none;" ng-class="{'showDetail':oldState==1}">
 						<!--
                         	作者：offline
@@ -176,8 +173,6 @@
 									<th class="td">订单总额</th>
 									<th class="td">订货日期</th>
 									<th class="td">交货日期</th>
-									<th class="td">正在生产</th>
-									<th class="td">是否完成</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -205,18 +200,12 @@
 									<td class="td">
 										<a class="td">{{item.endDate}}</a>
 									</td>
-									<td class="td">
-										<a class="td">{{item.isRunning}}</a>
-									</td>
-									<td class="td">
-										<a class="td">{{item.isCompleted}}</a>
-									</td>
 								</tr>
 							</tbody>
 						</table>
 
 					</div>
-					<div style="display: none;" ng-class="{'showDetail':oldState==4}">
+					<div style="display: none;height:70%;" ng-class="{'showDetail':oldState==4}">
 						<!--
                         	作者：offline
                         	时间：2017-09-23
@@ -229,13 +218,13 @@
 								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;margin-left: 15px;">
 									<p>Harting</p>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="ht" ng-value="1" ng-model="hartingValue" >HT1</label>
+										<input type="radio" name="oldht" ng-value="1" ng-model="hartingValue">HT1</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="ht" ng-value="2" ng-model="hartingValue">HT2</label>
+										<input type="radio" name="oldht" ng-value="2" ng-model="hartingValue">HT2</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="ht" ng-value="3" ng-model="hartingValue">HT3</label>
+										<input type="radio" name="oldht" ng-value="3" ng-model="hartingValue">HT3</label>
 									</div>
 								</div>
 								<div class="col-xs-1 col-sm-1 col-md-1" style="height:70%;font-size: 15px;text-align: center;background: transparent;">
@@ -243,13 +232,13 @@
 								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;">
 									<p>Bohren I</p>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="bre" ng-value="1" ng-model="bohrenValue">BR1</label>
+										<input type="radio" name="oldbre" ng-value="1" ng-model="bohrenValue">BR1</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="bre" ng-value="2" ng-model="bohrenValue">BR2</label>
+										<input type="radio" name="oldbre" ng-value="2" ng-model="bohrenValue">BR2</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="bre" ng-value="3" ng-model="bohrenValue">BR3</label>
+										<input type="radio" name="oldbre" ng-value="3" ng-model="bohrenValue">BR3</label>
 									</div>
 								</div>
 								<div class="col-xs-1 col-sm-1 col-md-1" style="height:70%;font-size: 15px;text-align: center;background: transparent;">
@@ -257,13 +246,13 @@
 								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;">
 									<p>Schleifen</p>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sl" ng-value="1" ng-model="schleifenValue">SL1</label>
+										<input type="radio" name="oldsl" ng-value="1" ng-model="schleifenValue">SL1</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sl" ng-value="2" ng-model="schleifenValue">SL2</label>
+										<input type="radio" name="oldsl" ng-value="2" ng-model="schleifenValue">SL2</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sl" ng-value="3" ng-model="schleifenValue">SL3</label>
+										<input type="radio" name="oldsl" ng-value="3" ng-model="schleifenValue">SL3</label>
 									</div>
 								</div>
 							</div>
@@ -276,13 +265,13 @@
 								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;margin-left: 15px;">
 									<p>Themerform</p>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="tf" ng-value="1" ng-model="themerformValue">TF1</label>
+										<input type="radio" name="oldtf" ng-value="1" ng-model="themerformValue">TF1</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="tf" ng-value="2" ng-model="themerformValue">TF2</label>
+										<input type="radio" name="oldtf" ng-value="2" ng-model="themerformValue">TF2</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="tf" ng-value="3" ng-model="themerformValue">TF3</label>
+										<input type="radio" name="oldtf" ng-value="3" ng-model="themerformValue">TF3</label>
 									</div>
 								</div>
 								<div class="col-xs-1 col-sm-1 col-md-1" style="height:70%;font-size: 15px;text-align: center;background: transparent;">
@@ -290,13 +279,13 @@
 								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;">
 									<p>Bohren II</p>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="br2" ng-value="1" ng-model="bohreniiValue">BR1</label>
+										<input type="radio" name="oldbr2" ng-value="1" ng-model="bohreniiValue">BR1</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="br2" ng-value="2" ng-model="bohreniiValue">BR2</label>
+										<input type="radio" name="oldbr2" ng-value="2" ng-model="bohreniiValue">BR2</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="br2" ng-value="3" ng-model="bohreniiValue">BR3</label>
+										<input type="radio" name="oldbr2" ng-value="3" ng-model="bohreniiValue">BR3</label>
 									</div>
 								</div>
 								<div class="col-xs-1 col-sm-1 col-md-1" style="height:70%;font-size: 15px;text-align: center;background: transparent;">
@@ -304,13 +293,13 @@
 								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;">
 									<p>Schneiden I</p>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sd" ng-value="1" ng-model="schneidenValue">SD1</label>
+										<input type="radio" name="oldsd" ng-value="1" ng-model="schneidenValue">SD1</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sd" ng-value="2" ng-model="schneidenValue">SD2</label>
+										<input type="radio" name="oldsd" ng-value="2" ng-model="schneidenValue">SD2</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sd" ng-value="3" ng-model="schneidenValue">SD3</label>
+										<input type="radio" name="oldsd" ng-value="3" ng-model="schneidenValue">SD3</label>
 									</div>
 								</div>
 							</div>
@@ -318,18 +307,19 @@
 							</div>
 						</div>
 
-						<div class="col-xs-12  col-sm-12 col-md-12" style="height: 40%;margin-top: 5px;">
+						<div class="col-xs-12  col-sm-12 col-md-12" style="height: 60%;margin-top: 5px;">
 							<div class="col-xs-12  col-sm-12 col-md-12 silicon pull-left" style="height: 80%;">
+							
 								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;margin-left: 15px;">
 									<p>Assembly GH</p>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="gh" ng-value="1" ng-model="assemblyGhValue">GH1</label>
+										<input type="radio" name="oldgh" ng-value="1" ng-model="assemblyGhValue">GH1</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="gh" ng-value="2" ng-model="assemblyGhValue">GH2</label>
+										<input type="radio" name="oldgh" ng-value="2" ng-model="assemblyGhValue">GH2</label>
 									</div>
 									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="gh" ng-value="3" ng-model="assemblyGhValue">GH3</label>
+										<input type="radio" name="oldgh" ng-value="3" ng-model="assemblyGhValue">GH3</label>
 									</div>
 								</div>
 								<div class="col-xs-1 col-sm-1 col-md-1 " style="height:60px;font-size: 70%;text-align: center;background: transparent;">
@@ -342,6 +332,7 @@
 								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;">
 									<p>Assembly SH</p>
 								</div>
+								
 							</div>
 							<div class="col-xs-12  col-sm-12 col-md-12" style="padding: 0px;background: green;height: 20%;">
 							</div>
@@ -353,157 +344,24 @@
 						<!--
                         	作者：offline
                         	时间：2017-09-23
-                        	描述：设备功能运行
+                        	描述：加工订单状态
                        -->
-						<div class="col-xs-6  col-sm-6 col-md-6 pTitle">Product der Zahnstange</div>
-						<div class="col-xs-6  col-sm-6 col-md-6 pTitle">Product der Gehause</div>
-						<div class="col-xs-6  col-sm-6 col-md-6" style="height: 40%;">
-							<div class="col-xs-12  col-sm-12 col-md-12 silicon pull-left" style="height: 80%;">
-								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;margin-left: 15px;">
-									<p>Harting</p>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="ht" value="HT1">1</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="ht" value="HT2">2</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="ht" value="HT3">3</label>
-									</div>
-								</div>
-								<div class="col-xs-1 col-sm-1 col-md-1" style="height:70%;font-size: 15px;text-align: center;background: transparent;">
-								</div>
-								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;">
-									<p>Bohren I</p>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="bre" value="BR1">1</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="bre" value="BR2">2</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="bre" value="BR3">3</label>
-									</div>
-								</div>
-								<div class="col-xs-1 col-sm-1 col-md-1" style="height:70%;font-size: 15px;text-align: center;background: transparent;">
-								</div>
-								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;">
-									<p>Schleifen</p>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sl" value="SL1">1</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sl" value="SL2">2</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sl" value="SL3">3</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-xs-12  col-sm-12 col-md-12" style="padding: 0px;background: green;height: 20%;">
-							</div>
-						</div>
-
-						<div class="col-xs-6  col-sm-6 col-md-6" style="height: 40%;">
-							<div class="col-xs-12  col-sm-12 col-md-12 silicon pull-left" style="height: 80%;">
-								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;margin-left: 15px;">
-									<p>Themerform</p>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="tf" value="TF1">1</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="tf" value="TF2">2</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="tf" value="TF3">3</label>
-									</div>
-								</div>
-								<div class="col-xs-1 col-sm-1 col-md-1" style="height:70%;font-size: 15px;text-align: center;background: transparent;">
-								</div>
-								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;">
-									<p>Bohren II</p>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="br2" value="BR1">1</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="br2" value="BR2">2</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="br2" value="BR3">3</label>
-									</div>
-								</div>
-								<div class="col-xs-1 col-sm-1 col-md-1" style="height:70%;font-size: 15px;text-align: center;background: transparent;">
-								</div>
-								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;">
-									<p>Schneiden I</p>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sd" value="SD1">1</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sd" value="SD2">2</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="sd" value="SD3">3</label>
-									</div>
-								</div>
-							</div>
-							<div class="col-xs-12  col-sm-12 col-md-12" style="padding: 0px;background: green;height: 20%;">
-							</div>
-						</div>
-
-						<div class="col-xs-12  col-sm-12 col-md-12" style="height: 40%;margin-top: 5px;">
-							<div class="col-xs-12  col-sm-12 col-md-12 silicon pull-left" style="height: 80%;">
-								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;margin-left: 15px;">
-									<p>Assembly GH</p>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="gh" value="gh1">1</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="gh" value="gh2">2</label>
-									</div>
-									<div class="col-xs-4 col-sm-4 col-md-4">
-										<input type="radio" name="gh" value="gh3">3</label>
-									</div>
-								</div>
-								<div class="col-xs-1 col-sm-1 col-md-1 " style="height:60px;font-size: 70%;text-align: center;background: transparent;">
-								</div>
-								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;">
-									<p>Assembly ZT</p>
-								</div>
-								<div class="col-xs-1 col-sm-1 col-md-1 " style="height:70%;font-size: 15px;text-align: center;background: transparent;">
-								</div>
-								<div class="col-xs-3 col-sm-3 col-md-3 silicon pull-left" style="height:70%;font-size: 15px;text-align: center;background: gray;border:2px solid gray;">
-									<p>Assembly SH</p>
-								</div>
-							</div>
-							<div class="col-xs-12  col-sm-12 col-md-12" style="padding: 0px;background: green;height: 20%;">
-							</div>
-						</div>
-						<div class="col-xs-12  col-sm-12 col-md-12" style="font-weight: bolder;font-size: 15px;text-align: center;">Assembly des Lenkungssystemes</div>
-
+						<h3>目前已生产了200个LS1, 100个LS2</h3>
+						<h3>还差300个LS1,400个LS2未生产</h3>
 					</div>	
 					<div style="display: none;" ng-class="{'showDetail':oldState==6}">
 						<!--
                         	作者：offline
                         	时间：2017-09-23
-                        	描述：加工订单状态
-                       -->
-						<h1>目前已生产了200个LS1, 100个LS2</h1>
-						<h1>还差300个LS1,400个LS2未生产</h1>
-					</div>	
-					<div style="display: none;" ng-class="{'showDetail':oldState==7}">
-						<!--
-                        	作者：offline
-                        	时间：2017-09-23
                         	描述：常规排产
                        -->
-						<h1>订单中需要的产品：LS1 = ZS1 + GH2 + ZT</h1>
-						<h1>订单中需要的产品：LS2 = ZS2 + GH1 + ZT + SH</h1>
-						<h2>其中部件来自Product der Zahnstange产线：ZS1 = HT1 + BR2 + SL2</h2>
-						<h2>其中部件来自Product der Zahnstange产线：ZS2 = HT2 + BR3 + SL1</h2>
-						<h2>其中部件来自Product der Gehause产线：GH1 = TF1 + BR1 + SD2</h2>
-						<h2>其中部件来自Product der Gehause产线：GH2 = TF2 + BR1 + SD1</h2>
-						<h2>外购部件为： ZT和SH</h2>
+						<h3>订单中需要的产品：LS1 = ZS1 + GH2 + ZT</h3>
+						<h3>订单中需要的产品：LS2 = ZS2 + GH1 + ZT + SH</h3>
+						<h3>其中部件来自Product der Zahnstange产线：ZS1 = HT1 + BR2 + SL2</h3>
+						<h3>其中部件来自Product der Zahnstange产线：ZS2 = HT2 + BR3 + SL1</h3>
+						<h3>其中部件来自Product der Gehause产线：GH1 = TF1 + BR1 + SD2</h3>
+						<h3>其中部件来自Product der Gehause产线：GH2 = TF2 + BR1 + SD1</h3>
+						<h3>外购部件为： ZT和SH</h3>
 					</div>				
 				</div>
 			</div>
@@ -525,8 +383,8 @@
 					</li>
 				</ul>
 			</div>
-			<div class="col-xs-12  col-sm-12 col-md-12">
-				<div class="well well-lg" style="height: 70%;overflow: auto;">
+			<div class="col-xs-12  col-sm-12 col-md-12" style="height: 100%;">
+				<div class="well well-lg" style="height: 100%;overflow: auto;overflow-x: auto;">
 					<div style="display: none;" ng-class="{'showDetail':newState==1}">
 						<!--
                         	作者：offline
@@ -542,7 +400,6 @@
 									<th class="td">订单总额</th>
 									<th class="td">订货日期</th>
 									<th class="td">交货日期</th>
-									<th class="td">优先级</th>
 									<th class="td">模拟</th>
 								</tr>
 							</thead>
@@ -572,21 +429,18 @@
 										<a class="td">{{item.endDate}}</a>
 									</td>
 									<td class="td">
-										<a class="td">{{item.orderTotal}}</a>
-									</td>
-									<td class="td">
 										<!--
                                         	作者：offline
                                         	时间：2017-09-24
                                         	描述：
                                         -->
-										<button ng-click="startAnalysisPrority()" type="button">点击模拟</button>
+										<button ng-click="startAnalysisPrority(item.id)" type="button" style="height: auto;">点击模拟</button>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<div style="display: none;" ng-class="{'showDetail':newState==2}">
+					<div style="display: none;height:70%;" ng-class="{'showDetail':newState==2}">
 						<!--
                         	作者：offline
                         	时间：2017-09-23
@@ -726,9 +580,9 @@
                         	描述：本地生产优化措施
                         -->
 
-						<h3 style="font-weight: bolder;">生产:<a ng-model="localCompanySuggestion">当前生产订单变为：A3, A3不含有产品：LS1,ZS产线生产变成生产：ZS2,ZS3,不生产：ZS1,GH产线生产变成生产：GH1,GH3,不生产：GH2</a></h3>
+						<h3 style="font-weight: bolder;">生产:<p ng-model="localCompanySuggestion">当前生产订单变为：A3, A3不含有产品：LS1,ZS产线生产变成生产：ZS2,ZS3,不生产：ZS1,GH产线生产变成生产：GH1,GH3,不生产：GH2</p></h3>
 
-						<h3 style="font-weight: bolder;">采购:<a ng-model="prioritySuggestion">对于装配产线的影响是：可以适当减少SH采购， 减少到2000根 ，可以适当减少ZT采购， 减少到0根</a></h3>
+						<h3 style="font-weight: bolder;">采购:<p ng-model="prioritySuggestion">对于装配产线的影响是：可以适当减少SH采购， 减少到2000根 ，可以适当减少ZT采购， 减少到0根</p></h3>
 
 					</div>
 					<div style="display: none;" ng-click="getCoorationCompanySuggestion()" ng-class="{'showDetail':newState==4}">
