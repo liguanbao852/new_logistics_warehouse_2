@@ -125,9 +125,11 @@ app.controller("homeCtrl", function($scope, $http, $log) {
 			// 请求成功执行代码
 			console.log("call getCustomerOrderList true.");
 			var list = angular.fromJson(response);
-			if( list.orderInfoList.length > 0){
-				$scope.runningorder.push(new orderModel(list.orderInfoList[0]));
-			}
+			angular.forEach(response.orderInfoList,function(item,index,response){
+				
+				$scope.runningorder.push(new orderModel(item));
+				
+			});
 		}).error(function(response) {
 			// 请求失败执行代码
 			var result = angular.fromJson({"orderInfoList":[{"order_end_date":{"date":27,"day":3,"hours":10,"minutes":19,"month":8,"nanos":0,"seconds":8,"time":1506478748000,"timezoneOffset":-480,"year":117},"order_name":"A2","customer_name":"李四","order_begin_date":{"date":14,"day":4,"hours":10,"minutes":19,"month":8,"nanos":0,"seconds":0,"time":1505355540000,"timezoneOffset":-480,"year":117},"orderProductInfoList":[{"isFull":"0","orderNo":"O00002","productCnt":0,"productId":"p00001","productName":"LS1","productNum":1000,"productPrice":400},{"isFull":"0","orderNo":"O00002","productCnt":0,"productId":"p00003","productName":"LS3","productNum":900,"productPrice":420}],"is_full":"0","order_cust":"C00002","order_no":"O00002"},{"order_end_date":{"date":28,"day":4,"hours":10,"minutes":39,"month":8,"nanos":0,"seconds":38,"time":1506566378000,"timezoneOffset":-480,"year":117},"order_name":"A3","customer_name":"王五","order_begin_date":{"date":20,"day":3,"hours":10,"minutes":39,"month":8,"nanos":0,"seconds":24,"time":1505875164000,"timezoneOffset":-480,"year":117},"orderProductInfoList":[{"isFull":"0","orderNo":"O00003","productCnt":0,"productId":"p00002","productName":"LS2","productNum":1000,"productPrice":600},{"isFull":"0","orderNo":"O00003","productCnt":0,"productId":"p00003","productName":"LS3","productNum":1000,"productPrice":450}],"is_full":"0","order_cust":"C00003","order_no":"O00003"},{"order_end_date":{"date":28,"day":4,"hours":14,"minutes":34,"month":8,"nanos":0,"seconds":20,"time":1506580460000,"timezoneOffset":-480,"year":117},"order_name":"A1","customer_name":"张三","order_begin_date":{"date":13,"day":3,"hours":14,"minutes":34,"month":8,"nanos":0,"seconds":14,"time":1505284454000,"timezoneOffset":-480,"year":117},"orderProductInfoList":[{"isFull":"0","orderNo":"O00001","productCnt":0,"productId":"p00001","productName":"LS1","productNum":1000,"productPrice":400},{"isFull":"0","orderNo":"O00001","productCnt":0,"productId":"p00002","productName":"LS2","productNum":800,"productPrice":600}],"is_full":"0","order_cust":"C00001","order_no":"O00001"}]});
@@ -169,6 +171,8 @@ app.controller("homeCtrl", function($scope, $http, $log) {
 	}
 
 	$scope.getPriorityOrders = function() {
+		$scope.pageNum = 1;
+
 		$scope.priorityOrders = [];
 		var url1 = path + "/order/queryNewOrderList.htm";
 		$http.get(url1).success(function(response) {

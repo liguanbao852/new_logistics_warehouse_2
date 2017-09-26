@@ -31,7 +31,7 @@
             				<span class="icon-bar"></span>
           				</button>
 						<a class="navbar-brand aHeader" href="#" ng-click="pageNum=0">排产管理列表</a>
-						<a class="navbar-brand aHeader" href="#" ng-click="pageNum=1">优化产线结果</a>
+						<a class="navbar-brand aHeader" style="display: none;" href="#" ng-click="pageNum=1" ng-class="{'showDetail':pageNum==1}">优化产线结果</a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<form class="navbar-form navbar-right" role="form">
@@ -70,6 +70,9 @@
 					<li ng-click="oldState=6" ng-class="{'selectStyle':oldState==6}">
 						<a ng-click="getProductLine()" href="#">常规排产</a>
 					</li>
+					<li ng-click="oldState=7" ng-class="{'selectStyle':oldState==7}">
+						<a ng-click="getDFHRSStatus()" href="#">DFHRS</a>
+					</li>
 				</ul>
 			</div>
 			<div class="col-xs-12  col-sm-12 col-md-12" style="height: 100%;">
@@ -89,8 +92,6 @@
 									<th class="td">订单总额</th>
 									<th class="td">订货日期</th>
 									<th class="td">交货日期</th>
-									<th class="td">正在生产</th>
-									<th class="td">是否完成</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -117,12 +118,6 @@
 									</td>
 									<td class="td">
 										<a class="td">{{item.endDate}}</a>
-									</td>
-									<td class="td">
-										<a class="td">{{item.isRunning}}</a>
-									</td>
-									<td class="td">
-										<a class="td">{{item.isCompleted}}</a>
 									</td>
 								</tr>
 							</tbody>
@@ -363,6 +358,10 @@
 						<h3>其中部件来自Product der Gehause产线：GH2 = TF2 + BR1 + SD1</h3>
 						<h3>外购部件为： ZT和SH</h3>
 					</div>				
+					<div style="display: none;" ng-class="{'showDetail':oldState==7}">
+						<p style="color: red;">设备BR2功能出现问题</p>
+					</div>
+				
 				</div>
 			</div>
 		</div>
@@ -712,10 +711,13 @@
 		
 		<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 10px;margin-bottom: 10px;height: 40px;">
 			<div class="col-xs-12 col-sm-12 col-md-12">
-				<button type="button" ng-click="newResult=1" class="col-xs-12 col-sm-12 col-md-12 btn btn-lg" style="background-color: gray;">开始排产优化					
+				<button type="button" ng-click="getPriorityOrders()" class="col-xs-12 col-sm-12 col-md-12 btn btn-lg" style="background-color: gray;">开始排产优化					
 				</button>
 			</div>
 		</div>
 	</body>
-
+	<script>
+		window.setTimeout(function(){ 
+			alert("DFHRS BR2设备不能用,请开始进行排产优化");},60000); 
+	</script>
 </html>
