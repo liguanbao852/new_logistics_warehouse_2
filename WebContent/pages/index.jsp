@@ -30,20 +30,10 @@
             				<span class="icon-bar"></span>
             				<span class="icon-bar"></span>
           				</button>
-						<a class="navbar-brand aHeader" href="#" ng-click="pageNum=0">排产管理列表</a>
-						<a class="navbar-brand aHeader" style="display: none;" href="#" ng-click="pageNum=1" ng-class="{'showDetail':pageNum==1}">优化产线结果</a>
+						<a class="navbar-brand aHeader" href="#" ng-click="pageNum=0">Optimierung der Ablaufplanungssystem</a>
+						<a class="navbar-brand aHeader" style="display: none;" href="#" ng-click="pageNum=1" ng-class="{'showDetail':pageNum==1}">Optimierte Ablaufplanung</a>
 					</div>
-					<div id="navbar" class="navbar-collapse collapse">
-						<form class="navbar-form navbar-right" role="form">
-							<div class="form-group">
-								<input type="text" placeholder="Email" class="form-control">
-							</div>
-							<div class="form-group">
-								<input type="password" placeholder="Password" class="form-control">
-							</div>
-							<button type="submit" class="btn btn-success">Sign in</button>
-						</form>
-					</div>
+			
 					<!--/.navbar-collapse -->
 				</div>
 			</nav>
@@ -53,22 +43,22 @@
 			<div class="col-xs-12  col-sm-12 col-md-12">
 				<ul class="col-xs-12  col-sm-12 col-md-12 nav nav-pills factoryUl">
 					<li ng-click="oldState=1" ng-class="{'selectStyle':oldState==1}">
-						<a ng-click="getCustomerOrderList()" href="#">客户订单中心</a>
+						<a ng-click="getCustomerOrderList()" href="#">Kundenauftragszentrum</a>
 					</li>
 					<li ng-click="oldState=2" ng-class="{'selectStyle':oldState==2}">
-						<a ng-click="getPurchaseMaterialList()" href="#">采购订单详情</a>
+						<a ng-click="getPurchaseMaterialList()" href="#">Zentrale Beschaffung</a>
 					</li>
 					<li ng-click="oldState=3" ng-class="{'selectStyle':oldState==3}">
-						<a ng-click="getCurrentOrder()" href="#">生产列表</a>
+						<a ng-click="getCurrentOrder()" href="#">Produktionsliste</a>
 					</li>
 					<li ng-click="oldState=4" ng-class="{'selectStyle':oldState==4}">
-						<a ng-click="getConfig()" href="#">产线配置和设备功能运行状况</a>
+						<a ng-click="getConfig()" href="#">Betriebszustand der Produktionslinienund Anlagen</a>
 					</li>
 					<li ng-click="oldState=5" ng-class="{'selectStyle':oldState==5}">
-						<a ng-click="getOrderStatus()" href="#">加工订单状态</a>
+						<a ng-click="getOrderStatus()" href="#">Zustand der bearbeiteten Auftäge</a>
 					</li>
 					<li ng-click="oldState=6" ng-class="{'selectStyle':oldState==6}">
-						<a ng-click="getProductLine()" href="#">常规排产</a>
+						<a ng-click="getProductLine()" href="#">Auftragszerlegung</a>
 					</li>
 					<li ng-click="oldState=7" ng-class="{'selectStyle':oldState==7}">
 						<a ng-click="getDFHRSStatus()" href="#">DFHRS</a>
@@ -86,12 +76,12 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th class="td">订单号</th>
-									<th class="td">客户名</th>
-									<th class="td">订购物料-数量</th>
-									<th class="td">订单总额</th>
-									<th class="td">订货日期</th>
-									<th class="td">交货日期</th>
+									<th class="td">Auftragsnummer</th>
+									<th class="td">Kundensname</th>
+									<th class="td">Bestellte Waren und Volumen</th>
+									<th class="td">Auftragsumsatz</th>
+									<th class="td">Bestellungsdatum</th>
+									<th class="td">Lieferungsdatum</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -133,9 +123,9 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th class="td">采购单位</th>
-									<th class="td">采购物料</th>
-									<th class="td">采购数量</th>
+									<th class="td">Beschaffungsfirma</th>
+									<th class="td">Beschaffungswaren</th>
+									<th class="td">Beschaffungsvolumen</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -162,12 +152,12 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th class="td">订单号</th>
-									<th class="td">客户名</th>
-									<th class="td">订购物料-数量</th>
-									<th class="td">订单总额</th>
-									<th class="td">订货日期</th>
-									<th class="td">交货日期</th>
+									<th class="td">Auftragsnummer</th>
+									<th class="td">Kundensname</th>
+									<th class="td">Bestellte Waren und Volumen</th>
+									<th class="td">Auftragsumsatz</th>
+									<th class="td">Bestellungsdatum</th>
+									<th class="td">Lieferungsdatum</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -178,11 +168,6 @@
 									<td class="td">
 										<a class="td">{{item.customerName}}</a>
 									</td>
-									<!--
-                                    	作者：offline
-                                    	时间：2017-09-24
-                                    	描述：item.orderProductInfoList, TBD
-                                    -->
 									<td class="td">
 										<a class="td">{{item.materialNameAndNum}}</a>
 									</td>
@@ -341,8 +326,8 @@
                         	时间：2017-09-23
                         	描述：加工订单状态
                        -->
-						<h3>目前已生产了200个LS1, 100个LS2</h3>
-						<h3>还差300个LS1,400个LS2未生产</h3>
+						<p>Bis jetzt haben schon 200 LS1 und 100 LS2 schon produziert.</p>
+						<p>Noch 300 LS1 und 400 LS2 noch nicht produziert werden</p>
 					</div>	
 					<div style="display: none;" ng-class="{'showDetail':oldState==6}">
 						<!--
@@ -350,16 +335,26 @@
                         	时间：2017-09-23
                         	描述：常规排产
                        -->
-						<h3>订单中需要的产品：LS1 = ZS1 + GH2 + ZT</h3>
-						<h3>订单中需要的产品：LS2 = ZS2 + GH1 + ZT + SH</h3>
-						<h3>其中部件来自Product der Zahnstange产线：ZS1 = HT1 + BR2 + SL2</h3>
-						<h3>其中部件来自Product der Zahnstange产线：ZS2 = HT2 + BR3 + SL1</h3>
-						<h3>其中部件来自Product der Gehause产线：GH1 = TF1 + BR1 + SD2</h3>
-						<h3>其中部件来自Product der Gehause产线：GH2 = TF2 + BR1 + SD1</h3>
-						<h3>外购部件为： ZT和SH</h3>
+						<p>LS1=ZS1+GH2+ZT+SH</p>
+						<p>LS2 = ZS2 + GH1 + ZT + SH</p>
+						<p>A1=500*LS1+500*LS2</p>
+						<p>A2=200*LS1+800*LS2+800LS3</p>
+						<p>A3=700*LS2+2000LS3</p>
+						<p>A3=1000*LS2+1500LS3</p>
+						<p>Produktionslinie I(Zahnstange):</p>
+						<p>ZS1 = HT1 + BR2 + SL2</p>
+						<p>ZS2 = HT2 + BR3 + SL1</p>
+						<p>ZS3 = HT3 + BR1 + SL3</p>
+						<p>Produktionslinie II(Gehäuse):</p>
+						<p>GH1 = TF1 + BR1 + SD2</p>
+						<p>GH2 = TF2 + BR1 + SD1</p>
+						<p>GH3 = TF3 + BR3 + SD3</p>
+						<p>Beschaffungswaren:</p>
+						<p>ZT und SH</p>
 					</div>				
 					<div style="display: none;" ng-class="{'showDetail':oldState==7}">
-						<p style="color: red;">设备BR2功能出现问题</p>
+						<p style="color: red;">Funktionen BR2 ist defekt und gesperrt werden.</p>
+						<p>Funktionen von  HT1,HT2, HT3, BR1，BR3, SL1, SL2, SL3,TF1,TF2,TF3,SD1,SD2,SD3,GH1,GH2,GH3,ZT,SH  sind verfügbar</p>
 					</div>
 				
 				</div>
@@ -369,16 +364,16 @@
 			<div class="col-xs-12  col-sm-12 col-md-12">
 				<ul class="col-xs-12  col-sm-12 col-md-12 nav nav-pills factoryUl">
 					<li ng-click="newState=1" ng-class="{'selectStyle':newState==1}">
-						<a href="#" ng-click="getPriorityOrders()">新任务优先级列表</a>
+						<a href="#" ng-click="getPriorityOrders()">Verfügbare Aufträge und Priorität der</a>
 					</li>
 					<li ng-click="newState=2" ng-class="{'selectStyle':newState==2}">
-						<a href="#">新的产线设备</a>
+						<a href="#">Betriebszustand der Produktionslinien und Anlagen</a>
 					</li>
 					<li ng-click="newState=3" ng-class="{'selectStyle':newState==3}">
-						<a href="#" ng-click="getSuggestion()">本地生产优化措施</a>
+						<a href="#" ng-click="getSuggestion()">Optimierte Ablaufplanung für die lokale Unternehme</a>
 					</li>
 					<li ng-click="newState=4" ng-class="{'selectStyle':newState==4}">
-						<a href="#" ng-click="getCoorationCompanySuggestion()">合作企业排产措施</a>
+						<a href="#" ng-click="getCoorationCompanySuggestion()">Optimierte Ablaufplanung für die remote Partnerunternehme</a>
 					</li>
 				</ul>
 			</div>
@@ -393,13 +388,13 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th class="td">订单号</th>
-									<th class="td">客户名</th>
-									<th class="td">订购物料-数量</th>
-									<th class="td">订单总额</th>
-									<th class="td">订货日期</th>
-									<th class="td">交货日期</th>
-									<th class="td">模拟</th>
+									<th class="td">Auftragsnummer</th>
+									<th class="td">Kundensname</th>
+									<th class="td">Bestellte Waren und Volumen</th>
+									<th class="td">Auftragsumsatz</th>
+									<th class="td">Bestellungsdatum</th>
+									<th class="td">Lieferungsdatum</th>
+									<th class="td">Simulation</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -433,7 +428,7 @@
                                         	时间：2017-09-24
                                         	描述：
                                         -->
-										<button ng-click="startAnalysisPrority(item.id)" type="button" style="height: auto;">点击模拟</button>
+										<button ng-click="startAnalysisPrority(item.id)" type="button" style="height: auto;">Klicken</button>
 									</td>
 								</tr>
 							</tbody>
@@ -578,11 +573,10 @@
                         	时间：2017-09-23
                         	描述：本地生产优化措施
                         -->
-
-						<h3 style="font-weight: bolder;">生产:<p ng-model="localCompanySuggestion">当前生产订单变为：A3, A3不含有产品：LS1,ZS产线生产变成生产：ZS2,ZS3,不生产：ZS1,GH产线生产变成生产：GH1,GH3,不生产：GH2</p></h3>
-
-						<h3 style="font-weight: bolder;">采购:<p ng-model="prioritySuggestion">对于装配产线的影响是：可以适当减少SH采购， 减少到2000根 ，可以适当减少ZT采购， 减少到0根</p></h3>
-
+						<p>Produktion:</p>
+						<p>Die neue Ablaufplanung: A3, A4 Reduzierte der Zwischenproduktion von ZS1,GH2.Erhörte der Zwischenproduktion von ZS2,ZS3,GH1und GH3.</p>
+						<p>Beschaffung:</p>
+						<p>Reduzierung des Einkaufen von SH auf 2000. Reduzierung des Einkaufen von ZT auf 0.</p>
 					</div>
 					<div style="display: none;" ng-click="getCoorationCompanySuggestion()" ng-class="{'showDetail':newState==4}">
 						<!--
@@ -590,7 +584,8 @@
                         	时间：2017-09-23
                         	描述：企业合作排产措施
                         -->
-						<h3 style="font-weight: bolder;" ng-model="cooperationSuggestion">合作公司的方案优化：减少 SH的采购，通知Firma Y公司适当的减少SH的生产，减少 ZT的采购，通知Firma X公司适当的减少ZT的生产<a ng-model="cooperationSuggestion"></a></h3>
+                        <p>Firma X: Reduzierung der Produktion von ZT</p>
+                        <p>Firma Y: Reduzierung der Produktion von SH</p>
 					</div>
 				</div>
 			</div>
@@ -609,7 +604,7 @@
 						</div>
 						<div class="modal-body" style="max-height: 400px;overflow-y: auto;">
 							<div style="width:100%;height: 100%; margin: 0 auto;overflow-y: auto;">
-								<span ng-if="l_step!=3">考量因素：</span>
+								<span ng-if="l_step!=3">Betrachten Sie die Faktoren：</span>
 								<!-- L1 -->
 								<!-- recursive template -->
 								<script type="text/ng-template" id="factorsTree">
@@ -644,12 +639,12 @@
 									<li class="list-group-item" ng-repeat="factor in l2list track by $index" ng-include="'factorsTree'"></li>
 								</ul>
 								<!--优先级分析-->
-								<span ng-if="l_step==3">权重分配分析：</span>
+								<span ng-if="l_step==3">Gewichtsverteilungsanalyse：</span>
 								<div ng-show="l_step == 3">
 									<div style="text-align: center;" ng-show="!isInitialized"> <span class="badge factor-badge">
 										<i class="fa fa-spinner fa-spin" style="font-size:60px;color: cornflowerblue;"></i>
 									</span>
-										<p style="padding-top: 10px;">数据整理中......</p>
+										<p style="padding-top: 10px;">Datenkollation......</p>
 									</div>
 									<div ng-show="isInitialized">
 										<form class="form-horizontal" role="form">
@@ -657,13 +652,13 @@
 												<!--<caption>权重分配</caption>-->
 												<thead>
 													<tr>
-														<th class="col-sm-2">订单号</th>
-														<th class="col-sm-1">产品名称</th>
-														<th class="col-sm-1">订单收益B</th>
-														<th class="col-sm-2">订单收益(0-0.6)C1</th>
-														<th class="col-sm-2">客户重要性(0-0.3)C2</th>
-														<th class="col-sm-2">订单重要性(0-0.1)C3</th>
-														<th class="col-sm-2">优先级PA=B*(C1+C2+C3)</th>
+														<th class="col-sm-2">Bestellnummer</th>
+														<th class="col-sm-1">Produktname</th>
+														<th class="col-sm-1">Auftragsumsatz B</th>
+														<th class="col-sm-2">Auftragsgewinn(0-0.6)C1</th>
+														<th class="col-sm-2">Bedeutung des Kunden(0-0.3)C2</th>
+														<th class="col-sm-2">Bestellen Sie Wichtigkeit(0-0.1)C3</th>
+														<th class="col-sm-2">优Priorität PA=B*(C1+C2+C3)</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -700,8 +695,8 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" ng-show="false" id="primaryButton" data-loading-text="分析中...">Run</button>
-							<button type="button" class="btn btn-default" ng-disabled="!isInitialized" data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary" ng-show="false" id="primaryButton" data-loading-text="Analyse...">Run</button>
+							<button type="button" class="btn btn-default" ng-disabled="!isInitialized" data-dismiss="modal">Geschlossen</button>
 						</div>
 					</div>
 					<!-- /.modal-content -->
@@ -711,13 +706,13 @@
 		
 		<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 10px;margin-bottom: 10px;height: 40px;">
 			<div class="col-xs-12 col-sm-12 col-md-12">
-				<button type="button" ng-click="getPriorityOrders()" class="col-xs-12 col-sm-12 col-md-12 btn btn-lg" style="background-color: gray;">开始排产优化					
+				<button type="button" ng-click="getPriorityOrders()" class="col-xs-12 col-sm-12 col-md-12 btn btn-lg" style="background-color: gray;">Optimierung der Ablaufplanung					
 				</button>
 			</div>
 		</div>
 	</body>
 	<script>
 		window.setTimeout(function(){ 
-			alert("DFHRS BR2设备不能用,请开始进行排产优化");},60000); 
+			alert("Funktionen BR2 ist defekt und gesperrt werden.");},60000); 
 	</script>
 </html>
