@@ -1,7 +1,7 @@
 var app = angular.module("homeFactory", []);
 app.controller("homeCtrl", function($scope, $http, $log) {
 	//config
-	baseurl = "";
+	
 	$scope.pageNum = 0;
 	$scope.hartingValue = 2;
 	$scope.schleifenValue = 1;
@@ -210,7 +210,7 @@ app.controller("homeCtrl", function($scope, $http, $log) {
 			$scope.localCompanySuggestion = msg.newProductMeasures;
 		}).error(function(response) {
 			// 请求失败执行代码
-			var msg = angular.fromJson({"newProductMeasures":"当前生产订单变为：A3, A3不含有产品：LS1,ZS产线生产变成生产：ZS2,ZS3,不生产：ZS1,GH产线生产变成生产：GH1,GH3,不生产：GH2"});
+			var msg = angular.fromJson({"newProductMeasures":"Produktion : Die neue Ablaufplanung:  A3,A4 Reduzierte der Zwischenproduktion von ZS1,GH2.Erhörte der Zwischenproduktion von ZS2,ZS3,GH1und GH3."});
 			$scope.localCompanySuggestion = angular.fromJson(msg.newProductMeasures);
 			console.log("call getSuggestion false.");
 		});
@@ -225,7 +225,7 @@ app.controller("homeCtrl", function($scope, $http, $log) {
 			$scope.prioritySuggestion = msg.newProductMaterial;
 		}).error(function(response) {
 			// 请求失败执行代码
-			var msg = angular.fromJson({"newProductMaterial":"对于装配产线的影响是：可以适当减少SH采购， 减少到2000根 ，可以适当减少ZT采购， 减少到0根 。"});
+			var msg = angular.fromJson({"newProductMaterial":"Beschaffung:Reduzierung des Einkaufen von SH auf 2000 Reduzierung des Einkaufen von ZT auf 0."});
 			$scope.localCompanySuggestion = angular.fromJson(msg.newProductMaterial);		
 			console.log("call getSuggestion false.");
 		});
@@ -245,9 +245,9 @@ app.controller("homeCtrl", function($scope, $http, $log) {
 			$scope.cooperationSuggestion = msg.newCompanyMeasures;
 		}).error(function(response) {
 			// 请求失败执行代码
-			var msg = angular.fromJson({"newCompanyMeasures":"减少 SH的采购，通知Firma Y公司适当的减少SH的生产，减少 ZT的采购，通知Firma X公司适当的减少ZT的生产。"});
+			var msg = angular.fromJson({"newCompanyMeasures":"Firma X: Reduzierung der Produktion von ZT. Firma Y: Reduzierung der Produktion von SH."});
 
-			$scope.cooperationSuggestion = angular.fromJson(msg.newCompanyMeasures);
+		//	$scope.cooperationSuggestion = angular.fromJson(msg.newCompanyMeasures);
 			console.log("call getCoorationCompanySuggestion false.");
 		});
 	}
@@ -290,7 +290,7 @@ app.controller("homeCtrl", function($scope, $http, $log) {
 		
 	return [{
 			'index': '0',
-			'text': 'AA1: 可用的功能及加工时间',
+			'text': 'AA1: Verfügbare Funktionen und Bearbeitungszeit',
 			'method': uaa1_url,
 			'hasParameter': true,
 			'status': '2', // 0 not start, 1 in progress, 2 success, 3 error
@@ -299,7 +299,7 @@ app.controller("homeCtrl", function($scope, $http, $log) {
 		},
 		{
 			'index': '1',
-			'text': 'AA2: 可用的设备',
+			'text': 'AA2: Verfügbare Maschinen',
 			'method': uaa2_url,
 			'hasParameter': true,
 			'status': '2',
@@ -308,7 +308,7 @@ app.controller("homeCtrl", function($scope, $http, $log) {
 		},
 		{
 			'index': '2',
-			'text': 'AA3: 可用的生产物料',
+			'text': 'AA3: Verfügbare Rohstoffe',
 			'method': uaa3_url,
 			'hasParameter': true,
 			'status': '2',
@@ -317,7 +317,7 @@ app.controller("homeCtrl", function($scope, $http, $log) {
 		},
 		{
 			'index': '3',
-			'text': 'AA4可用的生产配件',
+			'text': 'AA4:Verfügbare Werkzeug',
 			'method': uaa4_url,
 			'hasParameter': true,
 			'status': '2',
@@ -335,7 +335,7 @@ function get_list1() {
 
 	return [{
 			'index': '0',
-			'text': 'PA1: 产线的组成是否构成',
+			'text': 'PA1: Verfügbarkeit der Prozessgestaltung',
 			'method': pa1_url,
 			'hasParameter': false,
 			'status': '2', // 0 not start, 1 in progress, 2 success, 3 error
@@ -344,7 +344,7 @@ function get_list1() {
 		},
 		{
 			'index': '1',
-			'text': 'PA2: 生产所需要的人工是否有',
+			'text': 'PA2: Verfügbarkeit der Kollegen',
 			'method': pa2_url,
 			'hasParameter': false,
 			'status': '2',
@@ -353,7 +353,7 @@ function get_list1() {
 		},
 		{
 			'index': '2',
-			'text': 'PA3: 本地生产所需的物流是否供应',
+			'text': 'PA3: Verfügbarkeit der lokalen Logistik',
 			'method': pa3_url,
 			'hasParameter': false,
 			'status': '2',
@@ -362,7 +362,7 @@ function get_list1() {
 		},
 		{
 			'index': '3',
-			'text': 'PA4: 新产线的组成是否对其它生产有影响',
+			'text': 'PA4: Einfluss auf die anderen Linien',
 			'method': pa4_url,
 			'hasParameter': false,
 			'status': '2',
@@ -377,7 +377,7 @@ function get_list2() {
 	
 	return [{
 			'index': '0',
-			'text': 'UA1: 待生产的任务列表',
+			'text': 'UA1: Zu produzierenden Aufträge',
 			'method': ua1_url,
 			'hasParameter': true,
 			'status': '2', // 0 not start, 1 in progress, 2 success, 3 error
@@ -386,7 +386,7 @@ function get_list2() {
 		},
 		{
 			'index': '1',
-			'text': 'UA2: 供货时间',
+			'text': 'UA2: Lieferungsdatum',
 			'method': ua1_url,
 			'hasParameter': true,
 			'status': '2',
@@ -395,7 +395,7 @@ function get_list2() {
 		},
 		{
 			'index': '2',
-			'text': 'UA3: 每一任务的生产成本',
+			'text': 'UA3: Produktionskosten',
 			'method': ua1_url,
 			'hasParameter': true,
 			'status': '2',
@@ -404,7 +404,7 @@ function get_list2() {
 		},
 		{
 			'index': '3',
-			'text': 'UA4: 每一任务的生产收益',
+			'text': 'UA4: Profit durch Auftrag',
 			'method': ua1_url,
 			'hasParameter': true,
 			'status': '2',
@@ -413,7 +413,7 @@ function get_list2() {
 		},
 		{
 			'index': '4',
-			'text': 'UA5: 每一任务的优先级权重',
+			'text': 'UA5: Priorität des Auftrags',
 			'method': ua1_url,
 			'hasParameter': true,
 			'status': '2',
@@ -422,7 +422,7 @@ function get_list2() {
 		},
 		{
 			'index': '5',
-			'text': 'UA6: 每一任务所来客户的优先级权重',
+			'text': 'UA6: Priorität der Kunden',
 			'method': ua1_url,
 			'hasParameter': true,
 			'status': '2',
@@ -534,7 +534,7 @@ function get_list2() {
 					angular.forEach(val.list, function(item) {
 						$scope.l0list[0].value.push({
 							'text': item.function_name,
-							'text1': item.elapsed_time + '秒',
+							'text1': item.elapsed_time + 's',
 							'status': item.is_available
 						});
 					});
@@ -574,7 +574,7 @@ function get_list2() {
 		if(step == 1) {
 
 			//val = mockProductline;
-			$scope.l1list[i].value = val.result ? "是" : "否";
+			$scope.l1list[i].value = val.result ? "Yes" : "No";
 			//$log.info($scope.l1list[i].value.length+"-------------------");
 		}
 		if(step == 2) {
