@@ -379,7 +379,7 @@
 			<div class="col-xs-12  col-sm-12 col-md-12">
 				<ul class="col-xs-12  col-sm-12 col-md-12 nav nav-pills factoryUl">
 					<li class="col-xs-3  col-sm-3 col-md-3" ng-click="newState=1" ng-class="{'selectStyle':newState==1}" style="margin: 0 0;background: transparent;">
-						<a href="#" ng-click="getPriorityOrders()">Verfügbare Aufträge und Priorität der</a>
+						<a href="#" ng-click="getPriorityOrders()">Verfügbarkeit und Prioritöt der Aufträge</a>
 					</li>
 					<li class="col-xs-3  col-sm-3 col-md-3" ng-click="newState=2" ng-class="{'selectStyle':newState==2}" style="margin: 0 0;background: transparent;">
 						<a href="#">Betriebszustand der Produktionslinien und Anlagen</a>
